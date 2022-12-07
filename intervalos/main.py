@@ -13,22 +13,23 @@
 
 
 def intervals(numbers_list):
-    #return [[numbers_list[0], numbers_list[-1]]]
     interval = []
     output = []
-    secundary = []
 
     for position, i in enumerate(numbers_list):
         if position == 0 or position == 1:
             interval.append(i)
         elif i == interval[-1] + 1:
-            interval[-1] = i
+            if len(interval) > 1:
+                interval[-1] = i
+            else:
+                interval.append(i)
         elif i != interval[-1] + 1:
-            secundary.append(i)
+            output.append(interval)
+            interval = []
+            interval.append(i)
 
     if interval:
         output.append(interval)
-    if secundary:
-        output.append(secundary)
 
     return output
